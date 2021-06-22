@@ -1,0 +1,927 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mobius Docs">
+      
+      
+      
+        <meta name="author" content="Mobius Team">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Architecture - Mobius System Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-blue" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Mobius System Documentation" class="md-header__button md-logo" aria-label="Mobius System Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mobius System Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/mobiusfinance/contracts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mobiusfinance/contracts
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Mobius System Documentation" class="md-nav__button md-logo" aria-label="Mobius System Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Mobius System Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mobiusfinance/contracts/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mobiusfinance/contracts
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Smart Contract
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Smart Contract" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Smart Contract
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        Source
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Source" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Source
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1_1">
+        Contracts
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Contracts" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Contracts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="source/contracts/Importable.html" class="md-nav__link">
+        Importable
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="source/contracts/Owned.html" class="md-nav__link">
+        Owned
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="source/contracts/Pausable.html" class="md-nav__link">
+        Pausable
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Arich.html" class="md-nav__link md-nav__link--active">
+        Architecture
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-compoents" class="md-nav__link">
+    Core Compoents
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Compoents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mobius" class="md-nav__link">
+    Mobius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reward" class="md-nav__link">
+    Reward
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle" class="md-nav__link">
+    Oracle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synth" class="md-nav__link">
+    Synth
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    Infrastructure
+  </a>
+  
+    <nav class="md-nav" aria-label="Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolver" class="md-nav__link">
+    Resolver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storages" class="md-nav__link">
+    Storages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    Utilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Audit.html" class="md-nav__link">
+        Audit History
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Publisher.html" class="md-nav__link">
+        Publisher
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-compoents" class="md-nav__link">
+    Core Compoents
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Compoents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mobius" class="md-nav__link">
+    Mobius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reward" class="md-nav__link">
+    Reward
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle" class="md-nav__link">
+    Oracle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synth" class="md-nav__link">
+    Synth
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    Infrastructure
+  </a>
+  
+    <nav class="md-nav" aria-label="Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolver" class="md-nav__link">
+    Resolver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storages" class="md-nav__link">
+    Storages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    Utilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/mobiusfinance/contracts/edit/master/docs/SmartContract/Arich.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="architecture">Architecture</h1>
+<p>This part records the interface description of each smart contract in the Mobius system.
+These documents attempt to describe the smart contract architecture of the project in words.
+We hope that any interested developer will read these documents to help understand the Mobius project's code structure and logic.</p>
+<ul>
+<li>
+<p>The addresses of currently-deployed contract instances are available in the <a href="../address.html">Addresses</a> section.</p>
+</li>
+<li>
+<p>The deployment of contracts is managed by the <a href="Publisher.html">Publisher</a> section.</p>
+</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<hr />
+<p>The Mobius system is composed of a number of core contract complexes, and several auxiliary contracts that enhance liquidity and general system functionality. These on-chain entities and how they communicate is reflected in the following high-level diagram.</p>
+<p><centered-image>
+    <img alt="Contract architecture graph" src="../img/Overview.jpg" />
+</centered-image></p>
+<p>The Oracle, Mobius, Synths, Storage, and Reward elements comprise the core of the system. The Infrastructure contracts are supporting components which, help Mobius to better manage the core function and implement the system.</p>
+<p>Each of the elements in this graph may be a complex composed of several contracts, as described below. Some relatively unimportant links have been omitted, but more detailed descriptions are available at the documentation pages for each specific contract.</p>
+<h2 id="core-compoents">Core Compoents</h2>
+<hr />
+<h3 id="mobius">Mobius</h3>
+<p>!!! note</p>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+massa, nec semper lorem quam in massa.
+</code></pre>
+<p>This part realizes the main function of synthetic asset trading and is the core of the contract architecture
+Mobius interacts with Oracle to obtain asset price, interacts with Reward to complete token distribution, liquidity incentive and other functions, and interacts with Synth to complete the issue of synthetic assets.</p>
+<p>Implement of Following Feature</p>
+<ul>
+<li>Stake</li>
+<li>Mint</li>
+<li>Burn</li>
+<li>Short</li>
+<li>Trade</li>
+<li>Liquidate</li>
+</ul>
+<p><strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/Mobius.html"><code>Mobius</code></a></td>
+<td>Contract directly called by User. It indirectly realizes the functions of mortgage, mint, burn and trading by calling other contracts, which can be understood as the main contract.</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Issuer.html"><code>Issuer</code></a></td>
+<td>Issue, record, burn debts and synthetic assets</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Staker.html"><code>Staker</code></a></td>
+<td>stake and unstake</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Trader.html"><code>Trader</code></a></td>
+<td>trade debt and synthetic assets</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Liquidator.html"><code>Liquidator</code></a></td>
+<td>Liquidate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reward">Reward</h3>
+<p>Control the incentives for providing liquidity on the platform for all types of activities, including stake tokens, trading synthetic assets or debts .</p>
+<p><strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/RC.html"><code>RewardCollateral</code></a></td>
+<td>Collateral Reward</td>
+</tr>
+<tr>
+<td><a href="source/contracts/RS.html"><code>RewardStaking</code></a></td>
+<td>Stake Reward</td>
+</tr>
+<tr>
+<td><a href="source/contracts/RT.html"><code>RewardTrading</code></a></td>
+<td>Trade Reward</td>
+</tr>
+</tbody>
+</table>
+<h3 id="oracle">Oracle</h3>
+<p>Responsible for docking with external forecaster to obtain the price of assets, including Mobius Token MOT and synthetic assets such as moBTC and moTSLA, feed the price to system contracts.
+<strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/MO.html"><code>MobiusOracle</code></a></td>
+<td>Obtain real-time prices of MOT tokens and provide them to AssetPrice</td>
+</tr>
+<tr>
+<td><a href="source/contracts/CO.html"><code>ChainLinkOracle</code></a></td>
+<td>Obitain real-time prices of the approved Mobius assets from decentralized Oracle ChainLink</td>
+</tr>
+<tr>
+<td><a href="source/contracts/AP.html"><code>AssetPrice</code></a></td>
+<td>Retrieves the real-time price of tokens (synthetic assets, stake) from Oracle and feeds it to the contract that calls it</td>
+</tr>
+</tbody>
+</table>
+<h3 id="synth">Synth</h3>
+<p>Control the supply, issuance and destruction of synthetic assets</p>
+<p><strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/Synth.html"><code>Synth</code></a></td>
+<td>Construct and Management of Synthetic Assets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="infrastructure">Infrastructure</h2>
+<hr />
+<h3 id="resolver">Resolver</h3>
+<p>Resolver tracks the latest instances of all contracts[inculde system contract and asset contract] required in the Mobius system, allowing them to be queried and used by a bytes32 name based on a system similar to DNS</p>
+<p><strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/Resolver.md"><code>Resolver</code></a></td>
+<td>Converts the contract name of type Byte32 to the contract address of type Address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="storages">Storages</h3>
+<p>Storage contracts stores data generated during the execution of contracts, such as the amount of certain class of synthetic assets for any user or the value of A transaction. The purpose of Storage is to separate data from the system contract, so that in the later Mobius version update, the new system contract deployment can directly use the previously generated data.</p>
+<p><strong>Constituent Contracts</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contracts</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/"><code>AddressStorge</code></a></td>
+<td>contract address storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>EscrowStorge</code></a></td>
+<td>escrow data storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>ExternalStorge</code></a></td>
+<td>manager  storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>IssuerStorge</code></a></td>
+<td>debt data storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>LiquidatorStorge</code></a></td>
+<td>liquidate related data storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>OracleStorge</code></a></td>
+<td>Asset Prices data storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>SettingStorge</code></a></td>
+<td>System setting index storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>StakerStorge</code></a></td>
+<td>Stake data storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>TokenStorge</code></a></td>
+<td>User assets storage</td>
+</tr>
+<tr>
+<td><a href="source/contracts/"><code>TraderStorge</code></a></td>
+<td>Trade data storage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="utilities">Utilities</h3>
+<p><strong>Constituent Contracts</strong></p>
+<p>These contracts mostly are not deployed on their own, but provide functionality inherited by other contracts already listed.</p>
+<table>
+<thead>
+<tr>
+<th>Contract</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="source/contracts/Owned.html"><code>Ownable</code></a></td>
+<td>A contract with a distinct owner who can have special privileges.</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Pausable.html"><code>Pausable</code></a></td>
+<td>A contract whose operations can be paused by its owner.</td>
+</tr>
+<tr>
+<td><a href="source/contracts/Importable.html"><code>Importable</code></a></td>
+<td>Modifier and Function which help to manage address and access right</td>
+</tr>
+</tbody>
+</table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="source/contracts/Pausable.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Pausable" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Pausable
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Audit.html" class="md-footer__link md-footer__link--next" aria-label="Next: Audit History" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Audit History
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            <a href=https://github.com/Synthetixio/synthetix/blob/master/LICENSE>Copyright &copy Mobius 2021 - 2022</a>
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>
